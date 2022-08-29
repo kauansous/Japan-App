@@ -14,14 +14,18 @@ class Categories extends StatelessWidget {
       width: 89,
       height: 113,
       child: Stack(
+        alignment: Alignment.bottomCenter,
         children: [
           Image.asset(ImageCategories!),
-          Text(
-            titleCategories!,
-            style: GoogleFonts.inter(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              color: Colors.white,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: Text(
+              titleCategories!,
+              style: GoogleFonts.inter(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+              ),
             ),
           ),
         ],
