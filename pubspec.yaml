@@ -31,6 +31,7 @@ dependencies:
     sdk: flutter
   device_preview: ^1.1.0
   google_fonts: ^3.0.1
+  responsive_framework: ^0.2.0
 
 dev_dependencies:
   flutter_test:
@@ -62,6 +63,7 @@ flutter:
     - assets/Desa.png
     - assets/Pantai2.png
     - assets/Gunung2.png
+    - assets/Pantai3.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

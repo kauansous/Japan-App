@@ -1,16 +1,14 @@
-import 'package:flutter/foundation.dart';
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
-import 'package:device_preview/device_preview.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:japan_app/Components/categories.dart';
 import 'package:japan_app/Components/destinasi.dart';
 
 void main() {
   runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => MyApp(), // Wrap your app
-    ),
+    const MyApp(), // Wrap your app
   );
 }
 
@@ -22,10 +20,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      useInheritedMediaQuery: true,
-      builder: DevicePreview.appBuilder,
-      locale: DevicePreview.locale(context),
-      home: MyHomePage(),
+      builder: ((context, child) => ResponsiveWrapper.builder(child,
+              maxWidth: 428,
+              minWidth: 320,
+              defaultScale: true,
+              breakpoints: [
+                const ResponsiveBreakpoint.autoScale(320, name: MOBILE),
+              ])),
+      home: const MyHomePage(),
     );
   }
 }
@@ -50,6 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SizedBox(
         width: double.infinity,
@@ -85,18 +88,24 @@ class _MyHomePageState extends State<MyHomePage> {
                       color: const Color(0xFF686868)),
                 ),
                 const SizedBox(height: 10),
-                Text(
-                  "Jelajahi dan Temukan\nTempat Favorit mu Di Dunia",
-                  style: GoogleFonts.inter(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black),
+                Padding(
+                  padding: const EdgeInsets.only(right: 15),
+                  child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: Text(
+                      "Jelajahi dan Temukan\nTempat Favorit mu Di Dunia",
+                      style: GoogleFonts.inter(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 38),
                 Row(
                   children: [
                     SizedBox(
-                      width: 268,
+                      width: width*0.71,
                       height: 48,
                       child: TextField(
                         cursorColor: Colors.black,
@@ -130,7 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     const SizedBox(width: 11),
                     Container(
-                      width: 56,
+                      width: width * 0.15,
                       height: 48,
                       decoration: BoxDecoration(
                         color: const Color(0xFF2B2B2B),
@@ -245,11 +254,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 SizedBox(
                   width: double.infinity,
-                  height: 193,                 
+                  height: 193,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
-                      Destinasi("assets/Pantai2.png", "Pantai Ubud", "Bali,indonesia")
+                      Destinasi("assets/Pantai2.png", "Pantai Ubud",
+                          "Bali,indonesia"),
+                      const SizedBox(
+                        width: 17,
+                      ),
+                      Destinasi(
+                          "assets/Gunung2.png", "Gunug Fuji", "Nganjuk, Japan"),
                     ],
                   ),
                 ),
